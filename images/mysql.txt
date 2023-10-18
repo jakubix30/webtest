@@ -1,0 +1,82 @@
+C:\xampp\mysql\bin\mysql.exe -u root
+create database klasa3TI; - stworz baze 
+use klasa3TI; - uzyj bazy
+create table uczniowie (nr int unsigned not null auto_increment, nazwisko varchar(20), imie varchar(15), ocena1 int, ocena2 int, ocena3 int, primary key(nr)); - tworzy tabele uczniowie( nr ktory jest int nieprzypisany nie pusty auto zwieksza sie, nazwisko do 20 znak, imie 15 znak, ocena1, ocena2, ocena3 to int, klucz główny to nr)
+insert into uczniowie (nazwisko, imie, ocena1, ocena2, ocena3) values('Abacka','Anna', 1, 1, 3); - wpisuje w tabeli uczniowie nazwisko=abacka, imie=anna, ocena1=1, ocena2=1, ocena3=3
+insert into uczniowie (nazwisko, imie, ocena1, ocena2, ocena3) values('Bronkowski','Bartek', 2, 3, 4);
+insert into uczniowie (nazwisko, imie, ocena1, ocena2, ocena3) values('Celinska ','Celina', 3, 4, 5);
+
+
+drop database nazwa; - usuwa baze
+show databases; - pokazuje bazy
+show tables
+desc uczniowie; - wyswietla schemat tabeli
+quit; - wyjsc
+
+
+select * from uczniowie where imie="Jan"; - pokaz uczniowie o imie jan
+select * from uczniowie where ocena1=4; - pokaz uczniowie z ocena1 to 1
+select * from uczniowie where nr=15; - pokaz uczniowie o nr 15
+select * from uczniowie; - wyswietla zawartosc cały
+load data infile "UczniowieSQL.txt" into table uczniowie (nazwisko,imie,ocena1,ocena2,ocena3); - ładuje plik
+truncate uczniowie; - czysci tablice
+select * from uczniowie where imie="Jan" and ocena3=3; - uczen imie jan i ocena3 to 3
+select * from uczniowie where nr between 7 and 10; - uczniowie z od nr 7 do 10
+select * from uczniowie where imie like "j%"; - poczatek imie z j
+select * from uczniowie where imie like "%e%"; - litera e w imie srodek
+select * from uczniowie where imie like "%a"; - końcuwki a (dziwczyny)
+select * from uczniowie where imie not like "%a"; - nie końcuwki a (chłopcy)
+select * from uczniowie order by imie; -normalnie (alfabetycznie)
+select * from uczniowie order by imie asc; - alfabetycznie
+select * from uczniowie order by imie desc; - alfabetycznie od tyłu
+select imie, ocena1, ocena2, ocena3 from uczniowie where imie like '%a' and ocena1=6 or ocena2=6 or ocena3=6; - pokaze imie (chłopak) z ocenami=6
+
+
+
+select imie, ocena1, ocena2, ocena3 from uczniowie where ocena1=1 or ocena2=1 or ocena3=1; - imiona uczniów z ocenami 1
+select imie, nazwisko, ocena3 from uczniowie order by ocena3 desc; - najlepsi uczniowie z oceny3 uporzadkowani mal  
+select imie, nazwisko, ocena3 from uczniowie order by ocena3 desc limit 5; - ^^^ tylko 5 najlepszych ^^^
+select imie, nazwisko from uczniowie where imie not like "%a" and ocena1>=4 and ocena2>=4 and ocena3>=4; - imie i nazwisko chłopców z wszystkich ocen co najmniej 4
+-select imie, nazwisko, form uczniowie where imie not like "%a" and (ocena1>=4 and ocena2>=4 and ocena3>=4);
+-select imie, nazwisko,ocena1, ocena2, ocena3 form uczniowie where imie not like "%a" and ocena1>=4 and ocena2>=4 and ocena3>=4;
+select * from uczniowie where imie="Jakub"; - dane o uczniach o imie jakub
+
+
+mysql dump - tworzy kopie
+C:\xampp\mysql\bin\mysql.exe klasa3ti -u root < baza_uczniowie.sql - właduje zapis sql do bazy klasa3TI
+C:\xampp\mysql\bin\mysql.exe klasa3ti -u root < kopia3TI-2.sql
+
+select * from uczniowie.nr, uczniowie.imie, uczniowie.nazwisko, adresy.miasto, adresy.ulice;
+select * from uczniowie.nr, uczniowie.imie, uczniowie.nazwisko, adresy.miasto, adresy.ulice, where uczniowie.nr=adresy.nr;
+select u.nr, u.imie, u.nazwisko, a.miasto, a.ulica, a.dom, from uczniowie && adresy as u, adres as 
+
+
+
+select * from uczniowie, kody, adresy where uczniowie.nr = adresy.nr  and adresy.miasto = kody.miasto; - wyświetla wszystko
+select * from uczniowie, kody, adresy where uczniowie.nr = adresy.nr  and adresy.miasto = kody.miasto order by uczniowie.nr asc; - wyswietla wszystko kolejnosci nr
+select count(*) from adresy;
+
+
+update uczniowie set imie='adela' where nr=1;
+
+
+select miasto, count(*) as liczba_uczniow from adresy group by miasto;
+
+
+mysql.exe -u root
+C:\xampp\mysql\bin\mysql.exe klasa3ti -u root < baza_uczniowie.sql first create database
+load data infile "UczniowieSQL.txt" into table uczniowie (nazwisko,imie,ocena1,ocena2,ocena3);
+1. 	create database -;
+2. 	use -;
+3. 	create table sale (id int unsigned not null auto_increment, sala varchar(7), przedmiot varchar(20), miejsca int, primary key(id));
+4. 	desc sale;
+5.	insert into uczniowie (sala, przedmiot, miejsca) values('202','informatyka', 12);
+	insert into uczniowie (sala, przedmiot, miejsca) values('203','programowanie', 15);
+6.	select * from sale;
+7.	desc skoki;
+8.	select * from soki;
+9.	select * from skoki where nr=11
+10.	select * from skoki where zawodnik="pl"
+11.	select nazwisko, imie, punkty2 from skoki order by punkty2 desc;
+12.	select nazwisko, imie, skok1, skok2 from skoki where skok1>119 and skok2>119;
+13.	select nazwisko, imie, punkty1 where imie like "A%" and punkty1 between 110 and 125
